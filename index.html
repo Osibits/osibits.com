@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Animated logo reveal: kept blocking so the static logo never flashes before it plays -->
+    <script src="logo-animation.js"></script>
     <style>
         html, body {
             height: 100%;
@@ -23,6 +25,10 @@
             text-align: center;
             font-family: 'Montserrat', sans-serif;
         }
+        /* Only the viewport clips: the body shrink-wraps the content and would cut the logo animation */
+        body {
+            overflow: visible;
+        }
         .content-wrapper {
             display: flex;
             flex-direction: column;
@@ -30,6 +36,7 @@
             gap: 10px;
             max-width: 100%;
             padding: 5px;
+            position: relative;
         }
         img {
             max-width: 70vw;
@@ -37,6 +44,28 @@
             width: auto;
             height: auto;
             padding: 10px;
+        }
+        .logo-animated #logo {
+            opacity: 0;
+        }
+        /* The text waits for the end of the logo reveal, then fades up line by line */
+        .logo-animated #logo ~ :not(.logo-animation) {
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .logo-revealed #logo ~ :not(.logo-animation) {
+            opacity: 1;
+            transform: none;
+        }
+        .logo-revealed #logo ~ :nth-child(3) { transition-delay: 0.1s; }
+        .logo-revealed #logo ~ :nth-child(4) { transition-delay: 0.2s; }
+        .logo-revealed #logo ~ :nth-child(5) { transition-delay: 0.3s; }
+        .logo-revealed #logo ~ :nth-child(6) { transition-delay: 0.4s; }
+        .logo-animation {
+            position: absolute;
+            overflow: visible;
+            pointer-events: none;
         }
         div {
             max-width: 70vw;
@@ -72,7 +101,7 @@
 </head>
 <body>
     <div class="content-wrapper">
-        <img src="osibits-logo.svg" alt="Osibits Logo">
+        <img id="logo" src="osibits-logo.svg" alt="Osibits Logo">
         <div>A holding company specializing in digital asset creation, including software platforms and content.</div>
         <div>Coming soon</div>
         <a href="mailto:contact@osibits.com" class="email-link">contact@osibits.com</a>

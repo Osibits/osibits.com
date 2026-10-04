@@ -48,13 +48,15 @@
         .logo-animated #logo {
             opacity: 0;
         }
-        /* The text waits for the end of the logo reveal, then fades up line by line */
-        .logo-animated #logo ~ :not(.logo-animation) {
+        /* Text and LinkedIn wait for the logo reveal, then fade up together. */
+        .logo-animated #logo ~ :not(.logo-animation),
+        .logo-animated .social-link {
             opacity: 0;
             transform: translateY(14px);
             transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .logo-revealed #logo ~ :not(.logo-animation) {
+        .logo-revealed #logo ~ :not(.logo-animation),
+        .logo-revealed .social-link {
             opacity: 1;
             transform: none;
         }
@@ -88,7 +90,8 @@
             color: #0077b5; 
             text-decoration: none;
         }
-        .social-link:hover {
+        .social-link:hover,
+        .logo-revealed .social-link:hover {
             opacity: 0.8;
         }
         .address {
@@ -121,5 +124,3 @@
     </a>
 </body>
 </html>
-
-

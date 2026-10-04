@@ -6,7 +6,7 @@
  * The <img id="logo"> stays in the page: it is the layout box, the accessible name and the fallback (no
  * script, reduced motion). The reveal plays in an SVG laid over it, which then keeps showing the finished
  * logo: the browser snaps images to whole pixels, so handing back to the <img> would show a small jump.
- * The text under the logo waits for the end of the reveal, then comes in (transition in index.html).
+ * The text and LinkedIn link wait for the end of the reveal, then come in (transition in index.html).
  * Loaded from <head> without defer, so the class below hides image and text before the first paint.
  */
 ;(() => {
@@ -14,7 +14,7 @@
 
   // Classes on <html>, styled in index.html.
   const ACTIVE_CLASS = 'logo-animated' // the overlay stands in for the <img>, the text waits
-  const REVEALED_CLASS = 'logo-revealed' // the reveal is over: the text comes in
+  const REVEALED_CLASS = 'logo-revealed' // the reveal is over: text and LinkedIn come in
   document.documentElement.classList.add(ACTIVE_CLASS)
   /** Back to the plain image, text shown at once. */
   const giveUp = () => document.documentElement.classList.remove(ACTIVE_CLASS)
